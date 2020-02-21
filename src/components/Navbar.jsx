@@ -32,8 +32,8 @@ class Navbar extends Component {
   {/* <!-- Right side --> */}
   <div className="level-right">
     <Link to='/'><img className="level-item image is-48x48" src='https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimg10.deviantart.net%2F0773%2Fi%2F2016%2F136%2Fb%2Fd%2Fnasa_wormball_by_squizit-da2r03a.png&f=1&nofb=1' alt='NASA'/></Link>
-    <p className="level-item"><Link to='/'>Newest Uploads</Link></p>
-    <p className="level-item"><Link to='/'>Most Popular</Link></p>
+    <p className="level-item"><Link to='/newest-uploads'>Latest Launch</Link></p>
+    <p className="level-item"><Link to="/all-launches">All Launches</Link></p>
     <p className="level-item"><Link to='/'>Random</Link></p>
     {/* <p className="level-item"><Link to='/' className="button is-success">New</Link></p> */}
   </div>

@@ -1,38 +1,51 @@
 import React, { Component } from 'react';
+import YouTube from 'react-youtube';
 
 class NewestUploads extends Component {
-    render() {
-        return (
-            <div>
-                <section className="section">
+
+
+    _onReady(event) {
+        // access to player in all event handlers via event.target
+        event.target.pauseVideo();
+      }
+    
+    showNewestUploads = () => {
+        console.log(this.props.latestLaunch)
+        const opts = {
+            height: '390',
+            width: '640'
+          };
+        // let results = this.props.latestLaunch.data.collection.items;
+        // return this.props.latestLaunch.map((newMedia,i)  => { key={i}
+        return <section className="section" >
                 <div className="container">
-      <h1 className="title">Section</h1>
+      <h1 className="title">Mission</h1>
       <div className="tile is-ancestor">
   <div className="tile is-vertical is-8">
     <div className="tile">
       <div className="tile is-parent is-vertical">
         <article className="tile is-child notification is-primary">
-          <p className="title">Vertical...</p>
-          <p className="subtitle">Top tile</p>
+          <p className="title">Launch Date</p> 
+          <p className="subtitle">{this.props.latestLaunch.launch_date_local.slice(0,10)}</p>
         </article>
         <article className="tile is-child notification is-warning">
-          <p className="title">...tiles</p>
-          <p className="subtitle">Bottom tile</p>
+          <p className="title">Mission Overview</p>
+          <p className="subtitle">{this.props.latestLaunch.cargo_manifest}</p>
         </article>
       </div>
       <div className="tile is-parent">
         <article className="tile is-child notification is-info">
-          <p className="title">Middle tile</p>
-          <p className="subtitle">With an image</p>
-          <figure className="image is-4by3">
-            <img src="https://bulma.io/images/placeholders/640x480.png" alt =''/>
+          <p className="title">{this.props.latestLaunch.mission_name}</p>
+          <p className="subtitle">{this.props.latestLaunch.rocket.rocket_name}</p>
+          <figure className="image">
+            <img src={this.props.latestLaunch.links.flickr_images} alt =''/>
           </figure>
         </article>
       </div>
     </div>
     <div className="tile is-parent">
       <article className="tile is-child notification is-danger">
-        <p className="title">Wide tile</p>
+        <p className="title">Socials</p>
         <p className="subtitle">Aligned with the right tile</p>
         <div className="content">
           {/* <!-- Content --> */}
@@ -43,17 +56,41 @@ class NewestUploads extends Component {
   <div className="tile is-parent">
     <article className="tile is-child notification is-success">
       <div className="content">
-        <p className="title">Tall tile</p>
-        <p className="subtitle">With even more content</p>
+        <p className="title">Details</p>
+        <p className="subtitle">{this.props.latestLaunch.details}</p>
         <div className="content">
           {/* <!-- Content --> */}
         </div>
+
       </div>
     </article>
   </div>
+ 
 </div>
+ <div className="tile is-parent">
+      <article className="tile is-child notification is-dark">
+        <p className="title">Watch the Launch!</p>
+        <p className="subtitle">Aligned with the right tile</p>
+        <div className="content">
+          {/* <!-- Content --> */}
+          <YouTube
+        videoId="8xeX62mLcf8"
+        opts={opts}
+        onReady={this._onReady}
+      />
+        </div>
+      </article>
+    </div>
     </div>
   </section>
+        // })
+    }
+
+
+    render() {
+        return (
+            <div>
+  {this.props.ready? (this.showNewestUploads()) : ("Loading....")}
             </div>
         );
     }
