@@ -12,13 +12,13 @@ class Navbar extends Component {
                         <div className="level-left">
                             <div className="level-item">
                                 <p className="subtitle is-5">
-                                    <strong>NASA</strong> API
+                                    <strong>SpaceX</strong> Launch
                                 </p>
                             </div>
                     <div className="level-item">
                         <div className="field has-addons">
                             <p className="control">
-                                <input className="input" type="text" placeholder="Find a post" />
+                                <input className="input" type="text" placeholder="Find a launch" />
                             </p>
                             <p className="control">
                                 <button className="button">
@@ -31,10 +31,10 @@ class Navbar extends Component {
 
   {/* <!-- Right side --> */}
   <div className="level-right">
-    <Link to='/'><img className="level-item image is-48x48" src='https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fimg10.deviantart.net%2F0773%2Fi%2F2016%2F136%2Fb%2Fd%2Fnasa_wormball_by_squizit-da2r03a.png&f=1&nofb=1' alt='NASA'/></Link>
-    <p className="level-item"><Link to='/newest-uploads'>Latest Launch</Link></p>
-    <p className="level-item"><Link to="/all-launches">All Launches</Link></p>
-    <p className="level-item"><Link to='/'>Random</Link></p>
+    <Link to='/'><img className=" is-rounded image is-96x96" src='https://crealab.com.mx/blog/wp-content/uploads/2019/03/spacex-logo-1170x658.png' alt='NASA'/></Link>
+    <p className="level-item"><Link to='/newest-uploads'>Latest Launches</Link></p>
+    <p className="level-item"><Link to="/all-launches">Upcoming Launches</Link></p>
+    <p className="level-item"><Link to='/'>Random Launch</Link></p>
     {/* <p className="level-item"><Link to='/' className="button is-success">New</Link></p> */}
   </div>
 </nav>

@@ -9,6 +9,7 @@ import axios from 'axios';
 import Bulma from '../node_modules/bulma';
 import NewestUploads from './components/NewestUploads';
 import MostPopular from './components/MostPopular'
+import HomePage from './components/HomePage'
 import SingleLaunch from './components/SingleLaunch'
 
 
@@ -57,9 +58,10 @@ class App extends Component {
         <div className="App">
     <Navbar />
     <Hero />
+    {/* <Hero /> */}
     <Switch>
-          {/* <Route exact path ="/" render={(props) => <HomePage {...props} />}/>
-          <Route exact path ="/NavBar" render={(props) => <NavBar {...props} />}/> */}
+          <Route exact path ="/" render={(props) => <HomePage {...props} />}/>
+          {/* <Route exact path ="/NavBar" render={(props) => <NavBar {...props} />}/> */}
           <Route exact path ="/newest-uploads" render={(props) => <NewestUploads {...props} latestLaunch={this.state.latestLaunch} ready={this.state.ready}/>}/>
           <Route exact path ="/all-launches" render={(props) => <MostPopular {...props} allLaunches={this.state.allLaunches} ready={this.state.ready}/>}/>
           {this.state.showLaunch && <Route exact path ="/" />}

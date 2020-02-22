@@ -8,7 +8,7 @@ class Footer extends Component {
                 <footer className="footer">
   <div className="content has-text-centered">
     <p>
-      <strong>NASA</strong> API by<Link to="https://github.com/Acostan13"> Alex Costan</Link>.
+      <strong>SpaceX</strong> Launch by<Link to="https://github.com/Acostan13"> Alex Costan</Link>.
     </p>
   </div>
 </footer>

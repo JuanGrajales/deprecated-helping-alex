@@ -4,21 +4,8 @@ class Hero extends Component {
     render() {
         return (
             <div>
-            <div className="container is-fluid">
-                <section className="hero is-dark">
-  <div className="hero-body">
-    <div className="container">
-      <h1 className="title">
-        Primary title
-      </h1>
-      <h2 className="subtitle">
-        Primary subtitle
-      </h2>
-    </div>
-  </div>
-</section>
+            <img className='has-ratio' src='https://get.wallhere.com/photo/space-spaceship-minimalism-clouds-rocket-logo-SpaceX-tesla-roadster-Tesla-Motors-Elon-Musk-1241153.jpg' alt='spacex' />
 </div>
-            </div>
         );
     }
 }
