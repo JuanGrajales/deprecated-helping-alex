@@ -3,7 +3,14 @@ import {Link} from 'react-router-dom';
 
 
 class Navbar extends Component {
+
+  showLoadingScreen = () => {
+    return <div> <progress className="progress is-large is-info" max="100">60%</progress>
+    </div>
+  }
+
     render() {
+      console.log(this.props)
         return (
             <div>
                 <div className="container is-fluid">
@@ -17,14 +24,19 @@ class Navbar extends Component {
                             </div>
                     <div className="level-item">
                         <div className="field has-addons">
-                            <p className="control">
-                                <input className="input" type="text" placeholder="Find a launch" />
+                          {this.props.loading ? 
+                          <>{this.showLoadingScreen()}</>:<>
+                                <p className="control">
+                                <input className="input" onBlur={this.props.blur} onChange={this.props.handleInputChange} type="text" placeholder="Find a launch" />
                             </p>
                             <p className="control">
-                                <button className="button">
-                                    Search
+                                <button className="button" onClick={this.props.focus}>
+                                    I'm Feeling Spacey
                                 </button>
                             </p>
+</>
+                          }
+                            
                     </div>
             </div>
         </div>
@@ -32,9 +44,11 @@ class Navbar extends Component {
   {/* <!-- Right side --> */}
   <div className="level-right">
     <Link to='/'><img className=" is-rounded image is-96x96" src='https://crealab.com.mx/blog/wp-content/uploads/2019/03/spacex-logo-1170x658.png' alt='NASA'/></Link>
-    <p className="level-item"><Link to='/newest-uploads'>Latest Launches</Link></p>
-    <p className="level-item"><Link to="/all-launches">Upcoming Launches</Link></p>
-    <p className="level-item"><Link to='/'>Random Launch</Link></p>
+    <p className="level-item"><Link to='/latest-launch'>Latest</Link></p>
+    <p className="level-item"><Link to={`/all-launches/:`}>Previous</Link></p>
+    {/* <p className="level-item"><Link to="/upcoming-launches">Upcoming</Link></p> */}
+
+    <p className="level-item"><Link to='/random-launch'>Random</Link></p>
     {/* <p className="level-item"><Link to='/' className="button is-success">New</Link></p> */}
   </div>
 </nav>

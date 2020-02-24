@@ -20,7 +20,7 @@ class NewestUploads extends Component {
       }
 
     showLoadingScreen = () => {
-      return <div> <progress class="progress is-large is-info" max="100">60%</progress>
+      return <div> <progress className="progress is-large is-info" max="100">60%</progress>
       </div>
     }
     
@@ -59,7 +59,7 @@ class NewestUploads extends Component {
           <YouTube 
             className='container is-fluid'
             playsInline
-            videoId="8xeX62mLcf8"
+            videoId={this.props.latestLaunch.links.youtube_id}
             opts={opts}
             onReady={this._onReady}
           />
@@ -84,6 +84,10 @@ class NewestUploads extends Component {
           <p className="title">Rocket Name</p> 
           <div className="content">
           <p className="subtitle">{this.props.latestLaunch.rocket.rocket_name}</p>
+          </div>
+          <p className="title">Manufacturer</p> 
+          <div className="content">
+          <p className="subtitle">{this.props.latestLaunch.rocket.second_stage.payloads[0].manufacturer}</p>
           <br></br>
         </div>
         
@@ -91,30 +95,34 @@ class NewestUploads extends Component {
         
       </div>
     </article>
-    <article class="tile is-child notification is-primary">
+    <article className="tile is-child notification is-primary">
     <div className="content">
     <p className="title">Details</p>
           <p className="subtitle">{this.props.latestLaunch.details}</p>
+          <br></br>
           </div>
-          <p className="title">Learn More</p> 
-          <div className="content">
-          <p className="subtitle"><Link to={this.props.latestLaunch.links.presskit}> Press Kit</Link></p>
-          <p className="subtitle"><Link to={this.props.latestLaunch.links.Wikipedia}> Wikipedia</Link></p>
-          </div>
+
         </article>
         
-        <article class="tile is-child notification is-warning">
-        <p className="title">Join The Conversation!</p> 
+        <article className="tile is-child notification is-warning">
+        <p className="title">Learn More</p>  
           <div className="content">
-          <p className="subtitle"><Link to={this.props.latestLaunch.links.reddit_campaign}> Reddit Campaign</Link></p>
-
+          <p className="subtitle"><a className="button is-warning" href={this.props.latestLaunch.links.reddit_campaign}> Reddit Campaign</a></p>
+          <div className="content">
+          <p className="subtitle"><a className="button is-warning" href={this.props.latestLaunch.links.presskit}> Press Kit</a></p>
+          <p className="subtitle"><a className="button is-warning" href={this.props.latestLaunch.links.wikipedia}> Wikipedia</a></p>
+          </div>
           </div>
         </article>
   </div>
-
+  
 </div>
     </div>
+    <br></br>
+    <br></br>
+    <Link to="/all-launches"><button className="button">Previous Launch</button></Link>
   </section>
+  
         // })
     }
 
@@ -122,8 +130,8 @@ class NewestUploads extends Component {
     render() {
         return (
             <div>
-              
   {this.props.ready? (this.showNewestUploads()) : (this.showLoadingScreen())}
+  
             </div>
         );
     }
