@@ -5,7 +5,7 @@ import YouTube from 'react-youtube';
 class Random extends Component {
 
   state = {
-    index: 88
+    index: 89
   }
   
     // displayImages = () => {
@@ -27,7 +27,6 @@ class Random extends Component {
     }
     
     showNewestUploads = () => {
-        console.log(this.props.upcomingLaunches)
         const opts = {
             height: '390',
             width: '640'
@@ -124,8 +123,8 @@ class Random extends Component {
     </div>
     <br></br>
     <br></br>
-    <button className="button" disabled={this.state.index < 88 ? false : true} onClick={() => this.setState({index: this.state.index <88 ? this.state.index+1 : this.state.index})} >Next Launch</button>
-  <button className="button" disabled={this.state.index > 0 ? false : true} onClick={() => this.setState({index: this.state.index >0 ? this.state.index-1 : this.state.index})} >Previous Launch</button>
+    <button className="button" onClick={() => this.setState({index: this.state.index <89 ? this.state.index+1 : this.state.index})} >Next Launch</button>
+  <button className="button"  onClick={() => this.setState({index: this.state.index >0 ? this.state.index-1 : this.state.index})} >Previous Launch</button>
   </section>
         // })
     }
