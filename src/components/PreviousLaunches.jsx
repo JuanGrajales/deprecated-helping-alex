@@ -1,30 +1,57 @@
 import React, { Component } from "react";
 import YouTube from "react-youtube";
-// import { Link } from "react-router-dom";
+// import {Link} from 'react-router-dom'
+
 
 
 
 class PreviousLaunches extends Component {
   state = {
     index: 89,
-    count: 89
+    launch: {}
   };
 
-
-
+  // updateIndex = () => {
+  //   let theLaunch = this.props.allLaunches.find(eachLaunch => {
+  //     return eachLaunch.mission_name === this.props.match.params.launch;
+  //   });
+  //   console.log(theLaunch);
+  //   this.setState({
+  //     index: theLaunch
+  //   })
+  // };
+  
+  showLaunchData = () => {
+    console.log(
+      "launch data:",
+      this.props.match.params.launch,
+      this.props.allLaunches
+    );
+    let theLaunch = this.props.allLaunches.find(eachLaunch => {
+      return eachLaunch.mission_name === this.props.match.params.launch;
+    });
+    console.log(theLaunch);
+    return theLaunch;
+    // this.setState({
+    //   launch: theLaunch
+    // })
+  };
+  async componentDidMount() {
+    console.log(this.props.match.params);
+    console.log(this.props);
+    let whatever = await this.showLaunchData();
+    this.setState({
+      launch: whatever 
+    });
+  }
   _onReady(event) {
     // access to player in all event handlers via event.target
     event.target.pauseVideo();
   }
 
-  changeIndex = () => {
-
-  }
-
   showLoadingScreen = () => {
     return (
       <div>
-        {" "}
         <progress className="progress is-large is-info" max="100">
           60%
         </progress>
@@ -32,43 +59,28 @@ class PreviousLaunches extends Component {
     );
   };
 
-  // componentDidMount() {
-  //   console.log("this.props jdwanshjrnfsef", this.props.allLaunches )
-  //   const hey = this.props.allLaunches.map(item => {
-  //     console.log("item", item)
-  //     return this.props.match.params.launch === item.mission_name
-  //   } )
-  //   console.log("hey ooeneoneoneoneoenoen", hey)
-  //   // console.log(this.props.allLaunches.findIndex(item => this.props.match.params.launch === item.mission_name ), this.props.allLaunches, this.props.match.params.launch)
-  //   this.setState({
-  //     index: this.props.allLaunches.findIndex(item => this.props.match.params.launch === item.mission_name ) || 89
+  // showLaunches = () => {
+  //   let launchList = this.state.allLaunches.map((eachLaunch,i)=>{
+  //     return <FoodBox key = {i} {...eachLaunch}  addToList ={this.addToList} index={i} />
   //   })
+  //   return launchList;
   // }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if(prevProps.match.params.launch !== this.props.match.params.launch) {
-  //     this.setState({
-  //       index: this.props.allLaunches.findIndex(item => this.props.match.params.launch === item.mission_name )
-  //     })
-  //   }
-  //   console.log("params launch", this.props.match.params.launch, this.props.allLaunches.findIndex(item => this.props.match.params.launch === item.mission_name))
-  // }
-
-  showNewestUploads = (launchData, missionName) => {
-
-    // const allLaunchData = launchData[missionIndex]
-    const allLaunchData = launchData.find(launch => launch.mission_name === missionName)
-    // console.log("alllaunches", allLaunchData[missionIndex]);
+  showNewestUploads = () => {
+    let launchData = this.state.launch;
+    console.log('launchData', launchData);
     const opts = {
       height: "390",
       width: "640"
     };
 
-    
+    //let previousLaunch = this.props.allLaunches[this.state.index];
+
+    // return this.props.allLaunches.map((previousLaunch,i)  => {
     return (
       <section className="section">
         <div className="container is-fluid">
-          <h1 className="title">{allLaunchData && allLaunchData.mission_name} Mission</h1>
+          <h1 className="title">{launchData.mission_name} Mission</h1>
           <br></br>
           <div className="tile is-ancestor">
             <div className="tile is-vertical is-8">
@@ -78,10 +90,10 @@ class PreviousLaunches extends Component {
                     {/* {this.displayImages()} */}
 
                     <h1 className="title">
-                      {allLaunchData &&allLaunchData.mission_name} Lift Off!
+                      {launchData.mission_name} Lift Off!
                     </h1>
                     <figure className="image is-3by5">
-                      <img src={allLaunchData.links && allLaunchData.links.flickr_images} alt="" />
+                      <img src={launchData.links.flickr_images} alt="" />
                     </figure>
                   </article>
                 </div>
@@ -89,14 +101,14 @@ class PreviousLaunches extends Component {
               <div className="tile is-parent">
                 <article className="tile is-child notification is-danger">
                   <p className="title">
-                    Watch The {allLaunchData.mission_name} Mission Launch!
+                    Watch The {launchData.mission_name} Mission Launch!
                   </p>
                   <div className="content">
                     {/* <!-- Content --> */}
                     <YouTube
                       className="container is-fluid"
                       playsInline
-                      videoId={allLaunchData.links && allLaunchData.links.youtube_id}
+                      videoId={launchData.links.youtube_id}
                       opts={opts}
                       onReady={this._onReady}
                     />
@@ -110,30 +122,24 @@ class PreviousLaunches extends Component {
                   <p className="title">Mission Logo</p>
 
                   {/* <!-- Content --> */}
-                  <img src={allLaunchData.links && allLaunchData.links.mission_patch_small} alt="" />
+                  <img src={launchData.links.mission_patch_small} alt="" />
                   <br></br>
                   <br></br>
                   <p className="title">Launch Date</p>
                   <div className="content">
                     <p className="subtitle">
-                      {/* {allLaunchData && allLaunchData.launch_date_local.slice(0, 10)} */}
-                      {allLaunchData.launch_date_local ? allLaunchData.launch_date_local.slice(0, 10) : "No Date"}
+                      {launchData.launch_date_local.slice(0, 10)}
                     </p>
                   </div>
                   {/* <!-- Content --> */}
                   <p className="title">Rocket Name</p>
                   <div className="content">
-                    <p className="subtitle">
-                      {allLaunchData.rocket && allLaunchData.rocket.rocket_name}
-                    </p>
+                    <p className="subtitle">{launchData.rocket.rocket_name}</p>
                   </div>
                   <p className="title">Manufacturer</p>
                   <div className="content">
                     <p className="subtitle">
-                      {
-                        allLaunchData.rocket && allLaunchData.rocket.second_stage.payloads[0]
-                          .manufacturer
-                      }
+                      {launchData.rocket.second_stage.payloads[0].manufacturer}
                     </p>
                     <br></br>
                   </div>
@@ -142,7 +148,7 @@ class PreviousLaunches extends Component {
               <article className="tile is-child notification is-primary">
                 <div className="content">
                   <p className="title">Details</p>
-                  <p className="subtitle">{allLaunchData.details}</p>
+                  <p className="subtitle">{launchData.details}</p>
                 </div>
                 <br></br>
               </article>
@@ -153,7 +159,7 @@ class PreviousLaunches extends Component {
                   <p className="subtitle">
                     <a
                       className="button is-warning"
-                      href={allLaunchData.links && allLaunchData.links.reddit_campaign}
+                      href={launchData.links.reddit_campaign}
                     >
                       {" "}
                       Reddit Campaign
@@ -163,7 +169,7 @@ class PreviousLaunches extends Component {
                     <p className="subtitle">
                       <a
                         className="button is-warning"
-                        href={allLaunchData.links && allLaunchData.links.presskit}
+                        href={launchData.links.presskit}
                       >
                         {" "}
                         Press Kit
@@ -172,7 +178,7 @@ class PreviousLaunches extends Component {
                     <p className="subtitle">
                       <a
                         className="button is-warning"
-                        href={allLaunchData.links && allLaunchData.links.wikipedia}
+                        href={launchData.links.wikipedia}
                       >
                         {" "}
                         Wikipedia
@@ -186,43 +192,41 @@ class PreviousLaunches extends Component {
         </div>
         <br></br>
         <br></br>
-        {/* <button
+        <button
           className="button"
-          disabled={this.state.count < this.props.allLaunches.length ? false : true}
+          disabled={this.state.index < 89 ? false : true}
           onClick={() =>
             this.setState({
-              count:
-                this.state.count < this.props.allLaunches.length ? this.state.count + 1 : this.state.count
+              index:
+                this.state.index < 89 ? this.state.index + 1 : this.state.index
             })
-            // this.props.history.push(`/all-launches/${this.props.allLaunches[this.state.count < 89 ? this.state.count + 1 : this.state.count].mission_name}`)
           }
         >
           Next Launch
         </button>
         <button
           className="button"
-          disabled={this.state.count > 0 ? false : true}
+          disabled={this.state.index > 0 ? false : true}
           onClick={() =>
             this.setState({
-              count:
-                this.state.count > 0 ? this.state.count - 1 : this.state.count
+              index:
+                this.state.index > 0 ? this.state.index - 1 : this.state.index
             })
           }
         >
           Previous Launch
-        </button> */}
-        {/* <Link to={`/all-launches/${allLaunchData[this.state.index+1].mission_name}`} >test</Link>  */}
+        </button>
       </section>
     );
     // })
   };
 
   render() {
-    console.log('vvvvvvv', this.props.match.params.launch)
+    console.log(this.props);
     return (
       <div>
-        {/* {this.props.ready ? (this.showNewestUploads()) : (this.showLoadingScreen())} */}
-        {this.props.ready ? this.showNewestUploads(this.props.allLaunches, this.props.match.params.launch) : ("Loading...")}
+        {this.props.ready ? this.showNewestUploads() : this.showLoadingScreen()}
+        {/* {this.props.ready? (this.showLaunchData()) : ("Loading")} */}
       </div>
     );
   }

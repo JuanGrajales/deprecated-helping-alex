@@ -1,21 +1,16 @@
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
-import { Link} from 'react-router-dom'
+//import { Link} from 'react-router-dom'
 
 
-class Hello extends Component {
+
+class AllLaunches extends Component {
 
   state = {
     index: 89
   }
   
-//   showCountryLinks = () => {
-//     let launchList = [...this.state.allLaunches]
-    
-//     return launchList.map(eachLaunch => {
-//       return <Link key={eachLaunch.mission_name} to={`/country-detail/${eachLaunch.mission_name}`}>{eachLaunch.mission_name}</Link>
-//     })
-//   }
+
 
     _onReady(event) {
         // access to player in all event handlers via event.target
@@ -28,7 +23,9 @@ class Hello extends Component {
     }
     
     showNewestUploads = () => {
+      const allLaunchData = this.props.allLaunches.find(launch => launch.mission_name === this.props.allLaunches.mission_name)
         console.log(this.props.allLaunches)
+        console.log(allLaunchData)
         const opts = {
             height: '390',
             width: '640'
@@ -115,6 +112,7 @@ class Hello extends Component {
           <div className="content">
           <p className="subtitle"><a className="button is-warning" href={previousLaunch.links.presskit}> Press Kit</a></p>
           <p className="subtitle"><a className="button is-warning" href={previousLaunch.links.wikipedia}> Wikipedia</a></p>
+          
           </div>
           </div>
         </article>
@@ -139,4 +137,4 @@ class Hello extends Component {
     }
 }
 
-export default Hello;
+export default AllLaunches;

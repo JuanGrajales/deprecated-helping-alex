@@ -18,9 +18,9 @@ class Navbar extends Component {
                         {/* <!-- Left side --> */}
                         <div className="level-left">
                             <div className="level-item">
-                                <p className="subtitle is-5">
-                                    <strong>SpaceX</strong> Launch
-                                </p>
+                            <Link to='/'><p className="subtitle is-5">
+                                <strong>SpaceX</strong> Launch
+                                </p></Link>
                             </div>
                     <div className="level-item">
                         <div className="field has-addons">
@@ -30,7 +30,7 @@ class Navbar extends Component {
                                 <input className="input" onBlur={this.props.blur} onChange={this.props.handleInputChange} type="text" placeholder="Find a launch" />
                             </p>
                             <p className="control">
-                                <button className="button" onBlur={this.props.blur} onClick={this.props.focus}>
+                                <button className="button" onClick={this.props.focus}>
                                     I'm Feeling Spacey
                                 </button>
                             </p>
@@ -44,8 +44,8 @@ class Navbar extends Component {
   {/* <!-- Right side --> */}
   <div className="level-right">
     <Link to='/'><img className=" is-rounded image is-96x96" src='https://crealab.com.mx/blog/wp-content/uploads/2019/03/spacex-logo-1170x658.png' alt='NASA'/></Link>
-    {/* <p className="level-item"><Link to='/latest-launch'>Latest</Link></p> */}
-    <p className="level-item"><Link to={`/all-launches/`}>All Launches</Link></p>
+    
+    <p className="level-item"><Link to={`/all-launches/:launch`}>All Launches</Link></p>
     {/* <p className="level-item"><Link to="/upcoming-launches">Upcoming</Link></p> */}
 
     <p className="level-item"><Link to='/random-launch'>Random</Link></p>
@@ -53,6 +53,7 @@ class Navbar extends Component {
   </div>
 </nav>
                 </div>
+                
             </div>
         );
     }

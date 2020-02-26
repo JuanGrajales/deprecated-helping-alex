@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import YouTube from 'react-youtube';
-
+import {LinkedinShareButton} from 'react-share';
 
 class Random extends Component {
 
@@ -115,6 +115,7 @@ class Random extends Component {
           <div className="content">
           <p className="subtitle"><a className="button is-warning" href={randomLaunch.links.presskit}> Press Kit</a></p>
           <p className="subtitle"><a className="button is-warning" href={randomLaunch.links.wikipedia}> Wikipedia</a></p>
+          <LinkedinShareButton children='' url='https://www.linkedin.com/feed/'>Share to Linked-In</LinkedinShareButton>
           </div>
           </div>
         </article>
